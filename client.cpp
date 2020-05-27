@@ -28,7 +28,7 @@ void Client::run() {
 		El "RENDIRSE" esta ahí de prueba.
 	*/
 	Protocolable *prtble;
-	Command *command = FactoryCommand::create("RENDIRSE");
+	Command *command = FactoryCommand::create("345");
 	Protocol::clientSend(this->socket, command);
 	delete(command);
 	Protocol::clientReceive(this->socket, &prtble);

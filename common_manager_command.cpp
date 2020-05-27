@@ -6,9 +6,6 @@ ManagerCommand::ManagerCommand(std::atomic<bool> &cl_talking,
 
 ManagerCommand::~ManagerCommand() {}
 
-Message ManagerCommand::operator()(Command &cmnd) {
-	return std::move(Message("PORQUE NO SOY POLIMORFICOOOO"));
-}
 
 //Devuelve un message por movimiento
 Message ManagerCommand::operator()(CommandSurr &cmnd) {

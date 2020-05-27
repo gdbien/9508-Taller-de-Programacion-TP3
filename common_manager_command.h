@@ -16,7 +16,6 @@ public:
 	ManagerCommand(std::atomic<bool> &cl_talking, Game &game);
 	~ManagerCommand();
 	//Devuelve un message por movimiento
-	Message operator()(Command &cmnd);
 	Message operator()(CommandSurr &cmnd);
 	Message operator()(CommandHelp &cmnd);
 	Message operator()(CommandNumb &cmnd);

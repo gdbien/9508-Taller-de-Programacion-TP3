@@ -1,23 +1,26 @@
 #include "common_game.h"
+#include "common_number_checker.h" //chequear desp
 #include <iostream>
 
-#define NUMBER_SIZE 3
 #define ATTMPTS_LEFT 10
 
 const char* InsufAttemptsException:: what() const throw() {
 	return "Used all attempts";	
 }
 
-Game::Game(const std::string number) : number(number), game_res(NUMBER_SIZE),
-									   attempts(ATTMPTS_LEFT) {}
+Game::Game(const std::string number, const size_t digit_count) : 
+		   number(number),
+		   digit_count(digit_count),
+		   game_res(digit_count),
+		   attempts(ATTMPTS_LEFT) {}
 
 Game::~Game() {}
 
 bool Game::guess(const std::string& answer) {
 	size_t good = 0;
 	size_t regular = 0;
-	for (size_t i = 0; i < NUMBER_SIZE; i++) {
-		for (size_t j = 0; j < NUMBER_SIZE; j++) {
+	for (size_t i = 0; i < digit_count; i++) {
+		for (size_t j = 0; j < digit_count; j++) {
 			if (number[i] == answer[j]) {
 				if (i == j) good++;
 				else regular++;
@@ -27,8 +30,8 @@ bool Game::guess(const std::string& answer) {
 	}
 	game_res.setter(good, regular);
 	attempts--;
-	if (attempts == 0 && good != NUMBER_SIZE) throw InsufAttemptsException();
-	return (good == NUMBER_SIZE) ? true : false;
+	if (attempts == 0 && good != digit_count) throw InsufAttemptsException();
+	return (good == digit_count) ? true : false;
 }
 
 std::string Game::getResult() const {

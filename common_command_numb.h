@@ -4,6 +4,7 @@
 #include <string>
 #include "common_command.h"
 #include "common_game.h"
+#include "common_message.h"
 
 class CommandNumb : public Command {
 private:
@@ -12,6 +13,7 @@ public:
 	CommandNumb(const std::string number);
 	~CommandNumb();
 	bool operator()(Game &game);
+	Message callManager(ManagerCommand &mngr) override;
 	std::vector<char> encodeData() override;
 	size_t encodeSize() override;
 };

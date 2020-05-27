@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include "common_manager_command.h"
 
 #define NUMBER_SIZE 2
 
@@ -11,6 +12,10 @@ CommandNumb::~CommandNumb() {}
 
 bool CommandNumb::operator()(Game &game) {
 	return game.guess(number);
+}
+
+Message CommandNumb::callManager(ManagerCommand &mngr) {
+	return mngr(*this);
 }
 
 std::vector<char> CommandNumb::encodeData() {

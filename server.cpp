@@ -3,6 +3,8 @@
 #include <arpa/inet.h>
 #include "common_protocol.h"
 
+#define DIGIT_COUNT 3 //De esta forma el server decido de cuanto hacer el juego
+
 Server::Server(const char* file_name) : running(true),
 	          						    svr_quitter(running, socket),
 	          						    rr_f_rdr(file_name) {
@@ -15,7 +17,7 @@ Server::~Server() {
 
 ThClient& Server::accept() {
 	std::string number = rr_f_rdr.getline();
-	Game game(number);
+	Game game(number, DIGIT_COUNT);
 	ThClient* th_client = new ThClient(socket.accept(), game);
 	clts_acptd.push_back(th_client);
 	return *th_client;

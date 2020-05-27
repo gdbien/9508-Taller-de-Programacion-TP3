@@ -14,10 +14,11 @@ public:
 class Game {
 private:
 	const std::string number;
+	const size_t digit_count;
 	GameResult game_res;
 	size_t attempts;
 public:
-	Game(const std::string number);
+	Game(const std::string number, const size_t digit_count);
 	~Game();
 	bool guess(const std::string &answer);
 	std::string getResult() const;

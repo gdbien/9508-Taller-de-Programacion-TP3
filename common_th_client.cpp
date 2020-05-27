@@ -27,7 +27,7 @@ void ThClient::run() {
 		try {
 			Protocol::serverReceive(this->sckt, &prtble);
 			Command *cmnd = static_cast<Command*>(prtble);
-			Message msg = mnger_cmnd(*cmnd); //NO SE ESTA COMPORTANDO POLIMORFICAMENTE
+			Message msg = cmnd->callManager(mnger_cmnd);
 			delete cmnd;
 			Protocol::serverSend(this->sckt, &msg);
 		} catch (...) {
