@@ -1,6 +1,7 @@
 #ifndef COMMAND_HELP
 #define COMMAND_HELP
 
+#include <vector>
 #include "common_command.h"
 #include "common_message.h"
 
@@ -12,7 +13,6 @@ public:
 	Message callManager(ManagerCommand &mngr) override;
 	std::vector<char> encodeData() override;
 	size_t encodeSize() override;
-
 };
 
 #endif // COMMAND_HELP

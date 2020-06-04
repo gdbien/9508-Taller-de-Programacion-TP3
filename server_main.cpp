@@ -6,10 +6,9 @@
 int main(int argc, char const *argv[]) {
 	try {
 		if (argc != 3) {
-			std::cerr << "Error: argumentos invalidos." << std::endl;
+			std::cerr << args_inval_msg << std::endl;
 			return EXIT_FAILURE;	
-		} // Falta chequear los otros 2 errores, podría crear una clase
-		  // tipo CheckInput que haga todos los chequeos
+		}
 		Server server(argv[2]);
 		server.bindAndListen(argv[1]);
 		server.run();	

@@ -1,13 +1,26 @@
 #include "server.h"
 #include <stdbool.h>
 #include <arpa/inet.h>
+#include <exception>
+#include <iostream>
+#include <string>
 #include "common_protocol.h"
+#include "common_file_checker.h"
 
-#define DIGIT_COUNT 3 //De esta forma el server decido de cuanto hacer el juego
+#define DIGIT_COUNT 3 //De esta forma el server decide de cuanto hacer el juego
 
 Server::Server(const char* file_name) : running(true),
 	          						    svr_quitter(running, socket),
 	          						    rr_f_rdr(file_name) {
+	int ret = FileChecker::isGood(file_name, DIGIT_COUNT);
+	if (ret < 0) {
+		if (ret == F_CHK_INVL_PATRN) {
+			std::cerr << file_nber_rep_msg << std::endl;	
+		} else {
+			std::cerr << file_nber_oor_msg << std::endl;
+		}
+		throw std::exception();
+	}
 	svr_quitter.start();
 }
 
@@ -18,7 +31,7 @@ Server::~Server() {
 ThClient& Server::accept() {
 	std::string number = rr_f_rdr.getline();
 	Game game(number, DIGIT_COUNT);
-	ThClient* th_client = new ThClient(socket.accept(), game);
+	ThClient* th_client = new ThClient(socket.accept(), game, games_stats);
 	clts_acptd.push_back(th_client);
 	return *th_client;
 }
@@ -59,5 +72,5 @@ void Server::run() {
 		}	
 	} catch (...) {} //Catch de la excepcion de accept();
 	removeClients();
-	//ACA FALTA IMPRIMIR LAS ESTADISTICAS
+	games_stats.print();
 }

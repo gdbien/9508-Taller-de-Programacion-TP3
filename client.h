@@ -1,8 +1,9 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include "common_socket.h"
 #include <cstddef>
+#include "common_socket.h"
+#include "common_clients_errors.h"
 
 class Client {
 private:
@@ -20,11 +21,6 @@ public:
 		recibiendo mensajes.
 	*/
 	void run();
-	/*
- 		Cierra la comunicación de lectura y escritura
-		Lanza std::exception en caso de error.
-	*/
-	void shutdown();
 };
 
 #endif // CLIENT_H

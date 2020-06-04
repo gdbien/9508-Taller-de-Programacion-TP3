@@ -2,9 +2,11 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <vector>
 #include "common_manager_command.h"
 
 #define NUMBER_SIZE 2
+#define PROTOCOL_SIZE 3
 
 CommandNumb::CommandNumb(const std::string number) : number(number) {}
 
@@ -19,13 +21,13 @@ Message CommandNumb::callManager(ManagerCommand &mngr) {
 }
 
 std::vector<char> CommandNumb::encodeData() {
-	std::vector<char> enc_data(3);
+	std::vector<char> enc_data(PROTOCOL_SIZE);
 	enc_data[0] = (char)TypeCommand::NUMBER;
 	uint16_t value = htons(std::stoi(number));
-	std::memcpy(&enc_data[1], &value, NUMBER_SIZE);
+	std::memcpy(enc_data.data() + 1, &value, NUMBER_SIZE);
 	return enc_data;
 }
 
 size_t CommandNumb::encodeSize() {
-	return 3;
+	return PROTOCOL_SIZE;
 }

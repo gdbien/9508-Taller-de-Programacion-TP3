@@ -1,6 +1,7 @@
 #ifndef COMMAND_SURR_H
 #define COMMAND_SURR_H
 
+#include <vector>
 #include "common_command.h"
 #include "common_message.h"
 

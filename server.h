@@ -7,7 +7,7 @@
 #include "common_th_client.h"
 #include "server_quitter.h"
 #include "common_rr_file_reader.h"
-
+#include "common_server_errors.h"
 
 class Server {
 private:
@@ -16,6 +16,7 @@ private:
 	std::list<ThClient*> clts_acptd;
 	ServerQuitter svr_quitter;
 	RRFileReader rr_f_rdr;
+	GamesStatistics games_stats;
 	/*
 		Acepta un cliente, asignando memoria dinámica para un ThClient, y lo
 		inserta en la lista.
@@ -33,14 +34,28 @@ private:
 		join y delete.
 	*/
 	void removeDead();
+
 public:
-	Server(const char* file_name);
+	/*
+		Hace el chequeo del archivo e inicia a ServerQuitter.
+		Lanza std::exception() en caso de que el archivo sea inválido,
+		imprimiendo la causa.
+	*/
+	explicit Server(const char* file_name);
+	/*
+		Hace join de ServerQuitter.
+
+	*/
 	~Server();
 	/*
  		Pone al servidor a correr en el puerto service.
  		Lanza std::exception en caso de error.
 	*/
 	void bindAndListen(const char *service);
+	/*
+		Ciclo de interacción con el cliente, ServerQuitter es el que se encarga
+		de hacer que termine.
+	*/
 	void run();
 };
 

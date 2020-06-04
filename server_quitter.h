@@ -14,6 +14,10 @@ private:
 public:
 	ServerQuitter(std::atomic<bool> &svr_running, Socket &svr_sckt);
 	~ServerQuitter();
+	/*
+		Chequea constantemente si se recibió un 'q' por std::cin,
+		en tal caso, pone a svr_running a false y hace un shutdown del socket.
+	*/
 	void run() override;
 };
 

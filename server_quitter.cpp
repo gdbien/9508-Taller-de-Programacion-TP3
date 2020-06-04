@@ -6,7 +6,6 @@
 ServerQuitter::ServerQuitter(std::atomic<bool> &svr_running, Socket &svr_sckt)
 							: svr_running(svr_running), svr_sckt(svr_sckt) {}
 						     
-
 ServerQuitter::~ServerQuitter() {}
 
 void ServerQuitter::run() {

@@ -1,18 +1,20 @@
 #ifndef COMMON_MESSAGE_H
 #define COMMON_MESSAGE_H
 
-#include "common_protocolable.h"
 #include <string>
+#include <vector>
+#include "common_protocolable.h"
 
 class Message : public Protocolable {
 private:
-	std::string msg;
+	const std::string msg;
 public:
-	Message(const std::string msg);
+	explicit Message(const std::string msg);
 	virtual ~Message();
 	std::vector<char> encodeData() override;
 	size_t encodeSize() override;
-	void print();
+	void print() const;
+	bool gameIsOver() const;
 };
 
 #endif // COMMON_MESSAGE_H
