@@ -39,10 +39,9 @@ ThClient& Server::accept() {
 void Server::removeClients() {
 	for (auto it = clts_acptd.begin(); it != clts_acptd.end(); it++) {
     	ThClient* th_client = *it;
-    	th_client->stop();
     	th_client->join();
     	delete th_client;
-	}	
+	}
 }
 
 void Server::removeDead() {

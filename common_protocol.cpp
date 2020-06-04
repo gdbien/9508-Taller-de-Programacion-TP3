@@ -30,7 +30,7 @@ size_t Protocol::clientReceive(Socket &sckt, Protocolable **prtble) {
 	buf.resize(msg_len + 1);
 	sckt.receive(buf.data(), msg_len);
 	buf[msg_len] = '\0';
-	std::string msg(buf.begin(), buf.end());
+	std::string msg(buf.begin(), buf.end() - 1);
 	*prtble = new Message(msg);
 	return BYTE_MSG_SZ + msg_len;
 }

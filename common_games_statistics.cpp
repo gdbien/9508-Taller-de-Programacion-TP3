@@ -14,7 +14,8 @@ void GamesStatistics::addLoser(){
 }
 
 void GamesStatistics::print() const {
-	std::cout << "Estadísticas:​" << std::endl;
-	std::cout << "\t​Ganadores:  " << winners << std::endl;
-	std::cout << "\tPerdedores: " << losers << std::endl;
+	std::cout << "Estadísticas:" << std::endl;
+	std::cout << "\tGanadores:  " << winners << std::endl;
+	//Los perdedores nunca se imprimen.
+	//std::cout << "\tPerdedores: " << losers << std::endl;
 }
